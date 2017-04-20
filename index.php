@@ -1,51 +1,20 @@
-
-
 <?php
 
-include_once 'mvc/component/Db.php';
+ini_set('display_erorrs', 1);
+error_reporting(E_ALL);
 
-// "Front controller";
+define('ROOT', dirname(__FILE__));
 
-// 1. Configuration
-$config = include 'mvc/config/param.php';
+include_once (ROOT . '/components/Autoload.php');
+
+// include_once (ROOT . '/components/Db.php');
+// include_once (ROOT . '/components/Router.php');
+
 
 // 2. Connect to db
 
-$connection = Db::getConnection($config);
-
-// 3. Analyze query
-
-// $uri = $_SERVER['REQUEST_URI'];
-
-// $parts = explode('/', trim($uri, '/'));
-
-// $controllerName = ucfirst($parts[0]).'Controller';
-
-// $actionName = 'action'.ucfirst($parts[1]);
-
-include "mvc/controller/TaskController.php";
-
-//echo $controllerName;
-//echo '<hr>';
-//echo $actionName;
-
- $controller = new TaskController;
-
- echo $controller->actionList();
-
-//echo '<pre>';
-//print_r($controller);
-//echo '</pre>';
+$router = new Router;
+$router->run();
 
 
-
-
-// 4. Delegate control
-
-
-
-
-
-
-
-
+?>
