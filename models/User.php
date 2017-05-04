@@ -109,5 +109,6 @@
 			return $result->fetch();
 
 		}
+		
 	}
 ?>

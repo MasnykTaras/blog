@@ -23,8 +23,8 @@
 				if( $userId == false){
 					$errors[] = 'Incorect data';
 				}else{
-
-					User::auth($userId);
+					$user = getUserById($userId);
+					User::auth($userId, $user['name']);
 
 					header('Location: /cabinet');
 				}

@@ -33,6 +33,14 @@ footer{
 	float: left;
 	padding: 20px;
 }
+.user-inf{
+	float: right;	
+	display: block;
+	padding: 20px;
+}
+.user-inf p {
+	margin: 0;
+}
 .form{
 	max-width: 640px;
 	display: block;

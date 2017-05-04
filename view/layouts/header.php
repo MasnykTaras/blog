@@ -16,5 +16,8 @@
 					<li><a href="/logout">Logout</a></li>
 				<?php endif; ?>
 			</ul>
+			<div class="user-inf">
+				
+			</div>
 		</div>
 	</div>
