@@ -9,10 +9,12 @@ class Task
 		$result = $db->query('SELECT * FROM task ORDER BY id ASC');
 		$i = 0;
 		while($row = $result->fetch()){
+			$user = User::getUserById($row['user_id']);
 			$taskList[$i]['id'] = $row['id'];
-			$taskList[$i]['name'] = $row['name'];
+			$taskList[$i]['subject'] = $row['subject'];
 			$taskList[$i]['content'] = $row['content'];
-			$taskList[$i]['email'] = $row['email'];
+			$taskList[$i]['user_id'] = $row['user_id'];
+			$taskList[$i]['name'] = $user['name'];
 			$taskList[$i]['image'] = $row['image'];
 			$i++;
 		}
@@ -35,18 +37,60 @@ class Task
 		}
 		return false;
 	}
-	public static function addTask($subject, $content, $image, $email)
+	public static function addTask($subject, $content, $photo, $id)
+	{
+
+
+		$db = Db::getConnection();
+		$sql = 'INSERT INTO task (subject, content, user_id, photo) '
+				. 'VALUES (:subject, :content, :id, :photo)';
+
+		$result = $db->prepare($sql);
+
+		$result->bindParam(':subject', $subject, PDO::PARAM_STR);
+		$result->bindParam(':content', $content, PDO::PARAM_STR);
+		$result->bindParam(':id', $id, PDO::PARAM_INT);
+		$result->bindParam(':photo', $file, PDO::PARAM_STR);
+
+		return $result->execute();
+	}
+	public static function viewUserAll($id)
 	{
 
 		$db = Db::getConnection();
-		$sql = 'INSERT INTO task (name, content, email, image) '
-				. 'VALUES (:subject, :content, :email, :image)';
-		$result = $db->prepare($sql);
-		$result->bindParam(':subject', $subject, PDO::PARAM_INT);
-		$result->bindParam(':content', $content, PDO::PARAM_INT);
-		$result->bindParam(':email', $email, PDO::PARAM_INT);
-		$result->bindParam(':image', $file, PDO::PARAM_INT);
+		$result = $db->query('SELECT * FROM task WHERE user_id = '.$id);	
+		$tasks =[];
+		$i = 0;
+		while($row = $result->fetch()){
+			$tasks[$i]['id'] = $row['id'];
+			$tasks[$i]['subject'] = $row['subject'];
+			$tasks[$i]['content'] = $row['content'];
+			$tasks[$i]['usesr_id'] = $row['user_id'];
+			$tasks[$i]['image'] = $row['image'];
+			$i++;
+		}		
 
-		return $result->execute();
+		return $tasks;
+	}
+	public static function editOne($id)
+	{
+		$db = Db::getConnection();
+		$result = $db->query('SELECT * FROM task WHERE id = '.$id);
+		$result->setFetchMode(PDO::FETCH_ASSOC); 
+		return $result->fetch();
+	}
+	public static function editTask($subject, $content, $photo, $id)
+	{
+
+
+		$db = Db::getConnection();
+		$sql = 'UPDATE task SET subject = :subject, content = :content, photo = :photo WHERE id = :id';
+		$result = $db->prepare($sql);
+		$result->bindParam(':subject', $subject, PDO::PARAM_STR);
+		$result->bindParam(':content', $content, PDO::PARAM_STR);
+		$result->bindParam(':photo', $photo, PDO::PARAM_STR);
+		$result->bindParam(':id', $id, PDO::PARAM_INT);
+
+		return $result->execute();	
 	}
 }
