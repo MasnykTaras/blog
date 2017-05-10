@@ -89,7 +89,7 @@
 			if(isset($_SESSION['user'])){
 				return $_SESSION['user'];
 			}
-			header('Location: /sign');
+			return false;
 		}
 		public static function isGuest()
 		{
@@ -99,16 +99,15 @@
 			return false;
 		}
 		public static function getUserById($id)
-		{
+		{			
 			$db = Db::getConnection();
 			$sql = 'SELECT * FROM user WHERE id = :id';
+
 			$result = $db->prepare($sql);
 			$result->bindParam(':id', $id, PDO::PARAM_INT);
 			$result->setFetchMode(PDO::FETCH_ASSOC);
 			$result->execute();
 			return $result->fetch();
-
-		}
-		
+		}		
 	}
 ?>

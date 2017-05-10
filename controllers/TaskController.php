@@ -4,10 +4,18 @@ class TaskController
 {
     public function actionView($id) 
     {
+        $comment = '';
+      if($_POST['submit']){
+        $comment = $_POST['comment'];
+        if(User::checkLogged()){
+           $userId = User::checkLogged(); 
+        }
+       
+      }
     	if($id){
     		$taskOne = Task::viewOne($id);
 	    	include_once(ROOT . '/view/task/view.php');	 
-			return true;
+			  return true;
     	}    	  
     }
     

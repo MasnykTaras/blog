@@ -10,22 +10,21 @@
 				$email = $_POST['email'];
 				$password = $_POST['password'];
 				$errors = false;
+
 				if(User::checkEmail($email)){
 					$errors[] = 'User does not registered';
 				}
+
 				if(!User::checkPassword($password)){
 					$errors[] = 'Incorect password';
 				}	
 
 				$userId = User::checkUserData($email, $password);
-				
 
 				if( $userId == false){
 					$errors[] = 'Incorect data';
 				}else{
-					$user = getUserById($userId);
-					User::auth($userId, $user['name']);
-
+					User::auth($userId);
 					header('Location: /cabinet');
 				}
 

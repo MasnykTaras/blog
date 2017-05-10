@@ -93,4 +93,17 @@ class Task
 
 		return $result->execute();	
 	}
+	public static function addComment($comment, $userId, $taskId)
+	{
+		$db = Db::getConnection();
+		$sql = 'INSERT INTO comment (comment, user_id, task_id) '
+				. 'VALUES (:comment, :userId, :taskId)';
+		$result = $db->prepare($sql);
+
+		$result->bindParam(':comment', $comment, PDO::PARAM_STR);
+		$result->bindParam(':userId', $userId, PDO::PARAM_STR);
+		$result->bindParam(':taskId', $taskId, PDO::PARAM_INT);
+
+		return $result->execute();
+	}
 }

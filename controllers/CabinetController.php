@@ -4,6 +4,9 @@
 	{
 		public function actionIndex()
 		{
+			if(!User::checkLogged()){
+				header('Location: /sign');
+			}
 			$userId = User::checkLogged();
 
 			$user = User::getUserById($userId);
