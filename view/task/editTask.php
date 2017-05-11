@@ -1,6 +1,6 @@
 <?php include ROOT . '/view/layouts/header.php';?>
 	<div class="container">
-		<?php if($result): ?>
+		<?php if(isset($result)): ?>
 			<p>You change this task</p> 
 		<?php endif; ?>
 		<form class="form" action="#" method="post">

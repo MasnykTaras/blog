@@ -1,11 +1,11 @@
 <?php include ROOT . '/view/layouts/header.php';?>
 	<div class="container">
-		<?php if($result):?>
+		<?php if(isset($result)):?>
 			<p>You add task</p>
 		<?php else: ?>
 
 			<form class="form" action="#" method="post">
-			<?php if($errors):?>
+			<?php if(isset($errors)):?>
 				<ul>
 					<?php foreach($errors as $error): ?>
 						<li><?php echo $error; ?></li>

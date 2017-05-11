@@ -5,7 +5,7 @@ class TaskController
     public function actionView($id) 
     {
         $comment = '';
-      if($_POST['submit']){
+      if(isset($_POST['submit'])){
         $comment = $_POST['comment'];
         if(User::checkLogged()){
            $userId = User::checkLogged(); 
@@ -15,8 +15,9 @@ class TaskController
     	if($id){
     		$taskOne = Task::viewOne($id);
 	    	include_once(ROOT . '/view/task/view.php');	 
-			  return true;
-    	}    	  
+			  
+    	} 
+      return true;   	  
     }
     
     public function actionIndex() 
@@ -25,7 +26,7 @@ class TaskController
     	$tasksList = Task::viewAll();        
 
     	include_once (ROOT . '/view/task/index.php');	 
-        return true;
+      return true;
     }
 
     public function actionAdd()

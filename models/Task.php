@@ -1,7 +1,7 @@
 <?php 
 class Task 
 {
-	public function viewAll()
+	public static function viewAll()
 	{	
 		
 		$db = Db::getConnection();
@@ -21,7 +21,7 @@ class Task
 		
 		return $taskList;
 	} 
-	public function viewOne($id)
+	public static function viewOne($id)
 	{
 		if($id){
 			$db = Db::getConnection();
