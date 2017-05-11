@@ -15,7 +15,7 @@ class Task
 			$taskList[$i]['content'] = $row['content'];
 			$taskList[$i]['user_id'] = $row['user_id'];
 			$taskList[$i]['name'] = $user['name'];
-			$taskList[$i]['image'] = $row['image'];
+			$taskList[$i]['image'] = $row['photo'];
 			$i++;
 		}
 		
@@ -66,7 +66,7 @@ class Task
 			$tasks[$i]['subject'] = $row['subject'];
 			$tasks[$i]['content'] = $row['content'];
 			$tasks[$i]['usesr_id'] = $row['user_id'];
-			$tasks[$i]['image'] = $row['image'];
+			$tasks[$i]['image'] = $row['photo'];
 			$i++;
 		}		
 
