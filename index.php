@@ -1,5 +1,5 @@
 <?php
-
+//All erorrs chacke 
 ini_set('display_erorrs', 1);
 error_reporting(E_ALL);
 
