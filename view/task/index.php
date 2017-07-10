@@ -4,7 +4,7 @@
 			<div>
 				<h2><?php echo $taskList['subject']; ?></h2>
 				<h4>Post by - <a href="/archive/<?php echo $taskList['user_id']?>"><?php echo $taskList['name']?></a></h4>
-				<p><?php echo $taskList['content']; ?></p>
+				<p><?php echo Task::getShortContent($taskList['content']); ?></p>
 				<a href="task/<?php echo $taskList['id']; ?>">Know more >></a>
 				<hr>
 			</div>

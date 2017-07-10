@@ -6,7 +6,7 @@
 		<?php foreach ($tasks as $task): ?>
 			<div>
 				<h2><?php echo $task['subject']; ?></h2>
-				<p><?php echo $task['content']; ?></p>
+				<p><?php echo Task::getShortContent($task['content']); ?></p>
 				<a href="task/<?php echo $task['id']; ?>">Know more >> |</a>	
 				<a href="/edit/<?php echo $task['id']; ?>">Edit</a>
 				<hr>

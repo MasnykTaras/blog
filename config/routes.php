@@ -12,7 +12,8 @@ return [
 	'task/([0-9]+)' => 'task/view/$1',
 
 	'archive/([0-9]+)' => 'task/archive/$1',
+
 	
-	'' => 'task/index',
+	''=> 'task/index',
 	
 ];

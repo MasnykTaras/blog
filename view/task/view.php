@@ -5,7 +5,10 @@
 			<p><?php echo $taskOne['content']; ?></p>
 		</div>
 		<div class="comment-archive">
-			<p><?php ?></p>
+		
+			<?php foreach($comments as $comment):?>
+				<p><?php echo $comment['comment']; ?></p>
+			<?php endforeach;?>
 		</div>
 		<div class="comment">
 			<form class="form" method="post" action="#">
@@ -14,5 +17,4 @@
 			</form>
 		</div>
 	</div>
-
 <?php include ROOT . '/view/layouts/footer.php';?>

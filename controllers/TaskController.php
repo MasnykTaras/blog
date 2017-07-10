@@ -9,13 +9,15 @@ class TaskController
         $comment = $_POST['comment'];
         if(User::checkLogged()){
            $userId = User::checkLogged(); 
+        }else{
+          $userId = 0;
         }
-       
+        Task::addComment($comment, $userId, $id);
       }
     	if($id){
     		$taskOne = Task::viewOne($id);
-	    	include_once(ROOT . '/view/task/view.php');	 
-			  
+        $comments = Task::getComments($id);
+	    	include_once(ROOT . '/view/task/view.php');
     	} 
       return true;   	  
     }
@@ -28,7 +30,6 @@ class TaskController
     	include_once (ROOT . '/view/task/index.php');	 
       return true;
     }
-
     public function actionAdd()
     {   
         $subject = "";

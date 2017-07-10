@@ -65,7 +65,7 @@ class Task
 			$tasks[$i]['id'] = $row['id'];
 			$tasks[$i]['subject'] = $row['subject'];
 			$tasks[$i]['content'] = $row['content'];
-			$tasks[$i]['usesr_id'] = $row['user_id'];
+			$tasks[$i]['user_id'] = $row['user_id'];
 			$tasks[$i]['image'] = $row['photo'];
 			$i++;
 		}		
@@ -105,5 +105,25 @@ class Task
 		$result->bindParam(':taskId', $taskId, PDO::PARAM_INT);
 
 		return $result->execute();
+	}
+	public static function getComments($task_id)
+	{
+		$db = Db::getConnection();
+		$result = $db->query('SELECT * FROM comment WHERE task_id = '.$task_id);	
+		$comments =[];
+		$i = 0;
+		while($row = $result->fetch()){
+			$comments[$i]['id'] = $row['id'];
+			$comments[$i]['task_id'] = $row['task_id'];
+			$comments[$i]['user_id'] = $row['user_id'];
+			$comments[$i]['comment'] = $row['comment'];			
+			$i++;
+		}		
+
+		return $comments;
+	}
+	public static function getShortContent($content)
+	{
+		return substr($content,0,200) .  ' ...';
 	}
 }
