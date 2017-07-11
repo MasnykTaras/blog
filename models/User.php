@@ -108,6 +108,16 @@
 			$result->setFetchMode(PDO::FETCH_ASSOC);
 			$result->execute();
 			return $result->fetch();
-		}		
+		}	
+		public static function getName($user_id)
+		{
+			if($user_id == 0){
+				$user['name'] = 'Guest';
+			}else{
+				$user = User::getUserById($user_id);
+			}
+			
+			return $user['name'];
+		}	
 	}
 ?>

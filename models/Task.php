@@ -93,7 +93,7 @@ class Task
 
 		return $result->execute();	
 	}
-	public static function addComment($comment, $userId, $taskId)
+	public static function addComment($comment, $userId = 0, $taskId)
 	{
 		$db = Db::getConnection();
 		$sql = 'INSERT INTO comment (comment, user_id, task_id) '

@@ -4,10 +4,17 @@
 			<h2><?php echo $taskOne['subject']; ?></h2>
 			<p><?php echo $taskOne['content']; ?></p>
 		</div>
+		<hr>
 		<div class="comment-archive">
 		
 			<?php foreach($comments as $comment):?>
-				<p><?php echo $comment['comment']; ?></p>
+				<div>
+					<div>
+						<img src="">
+						<p><?php echo User::getName($comment['user_id']);?></p>
+					</div>
+					<p><?php echo $comment['comment']; ?></p>
+				</div>
 			<?php endforeach;?>
 		</div>
 		<div class="comment">
