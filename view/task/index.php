@@ -9,5 +9,8 @@
 				<hr>
 			</div>
 		<?php endforeach; ?>
+		<div class="col-xs-12">
+			<?php echo $pagination->get(); ?>
+		</div>
 	</div>
 <?php include ROOT . '/view/layouts/footer.php';?>

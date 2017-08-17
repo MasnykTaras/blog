@@ -13,7 +13,7 @@ return [
 
 	'archive/([0-9]+)' => 'task/archive/$1',
 
-	
+	'page-([0-9]+)' => 'task/index/$1',
 	''=> 'task/index',
 	
 ];

@@ -22,11 +22,15 @@ class TaskController
       return true;   	  
     }
     
-    public function actionIndex() 
+    public function actionIndex($currentPage = 1) 
     {
-    	$tasksList =[];
-    	$tasksList = Task::viewAll();        
+      $currentPage = $currentPage;
+      $total = Task::totalTask()['count'];
 
+    	$tasksList =[];
+    	$tasksList = Task::viewAll($currentPage);        
+
+      $pagination = new Pagination($currentPage, 'page-', $total, Task::TASK_PER_PAGE);
     	include_once (ROOT . '/view/task/index.php');	 
       return true;
     }

@@ -1,13 +1,19 @@
 <?php 
 class Task 
 {
-	public static function viewAll()
+	const TASK_PER_PAGE = 1;
+	public static function viewAll($currentPage = 1)
 	{	
-		
+		$limit = self::TASK_PER_PAGE;
+		$offset = ($currentPage - 1) * self::TASK_PER_PAGE;
 		$db = Db::getConnection();
-		$taskList =[];
-		$result = $db->query('SELECT * FROM task ORDER BY id ASC');
+
+		
+		$sql = 'SELECT * FROM task ORDER BY id ASC LIMIT '.$limit.' OFFSET '.$offset;
+		$result = $db->prepare($sql);
+		$result->execute();
 		$i = 0;
+		$taskList =[];
 		while($row = $result->fetch()){
 			$user = User::getUserById($row['user_id']);
 			$taskList[$i]['id'] = $row['id'];
@@ -125,5 +131,12 @@ class Task
 	public static function getShortContent($content)
 	{
 		return substr($content,0,200) .  ' ...';
+	}
+	public static function totalTask()
+	{
+		$db = Db::getConnection();
+		$result = $db->query('SELECT count(id) AS count FROM task');
+		$result->setFetchMode(PDO::FETCH_ASSOC);            
+        return $result->fetch();
 	}
 }
