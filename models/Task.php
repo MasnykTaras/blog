@@ -1,7 +1,9 @@
 <?php 
 class Task 
 {
-	const TASK_PER_PAGE = 1;
+	const TASK_PER_PAGE = 2;
+	const MAX_WIDTH = 320;
+    const MAX_HEIGHT = 240;
 	public static function viewAll($currentPage = 1)
 	{	
 		$limit = self::TASK_PER_PAGE;
@@ -56,7 +58,7 @@ class Task
 		$result->bindParam(':subject', $subject, PDO::PARAM_STR);
 		$result->bindParam(':content', $content, PDO::PARAM_STR);
 		$result->bindParam(':id', $id, PDO::PARAM_INT);
-		$result->bindParam(':photo', $file, PDO::PARAM_STR);
+		$result->bindParam(':photo', $photo, PDO::PARAM_STR);
 
 		return $result->execute();
 	}
@@ -139,4 +141,75 @@ class Task
 		$result->setFetchMode(PDO::FETCH_ASSOC);            
         return $result->fetch();
 	}
+	public static function uploadFile()
+		{
+
+			if (is_uploaded_file($_FILES["image"]["tmp_name"])){ 
+				
+				Task::resize($_FILES["image"]["tmp_name"],$_FILES["image"]['name']);
+				if (!file_exists(ROOT.'/uploaded/')) {
+				    mkdir(ROOT.'/uploaded/', 0777, true);
+				}	
+                  move_uploaded_file($_FILES["image"]["tmp_name"], ROOT.'/uploaded/'.$_FILES["image"]['name']);
+            }
+             return $_FILES["image"]['name'];
+		}
+		private static function resize($imageFile, $imageName)
+		{
+			list($originWidth, $originHeight) = getimagesize($imageFile);
+
+			if($originWidth > Task::MAX_WIDTH || $originHeight > Task::MAX_HEIGHT){
+
+				$extended = explode('.',strtolower($imageName));
+
+		    	$ratio = $originWidth/$originHeight;
+
+				$height = Task::MAX_WIDTH;
+				$width = Task::MAX_HEIGHT;
+
+		    	if((Task::MAX_WIDTH / Task::MAX_HEIGHT) > $ratio){
+
+		    		$width = Task::MAX_HEIGHT * $ratio;
+
+		    	}else{
+
+		    		$height = Task::MAX_WIDTH / $ratio;
+		    	}
+		    	
+				$image = '';
+		    	if($extended[1] == 'git'){
+
+		    		$image = imagecreatefromgif($imageFile);
+
+		    	}else if($extended[1] == 'png'){
+
+		    		$image = imagecreatefrompng($imageFile);
+
+		    	}else{
+
+		    		$image = imagecreatefromjpeg($imageFile);
+		    	}
+
+		    	$newImage = imagecreatetruecolor($width, $height);
+
+	    		imagecopyresampled($newImage, $image ,0,0,0,0, $width, $height, $originWidth, $originHeight);
+
+	    		if($extended[1] == 'git'){
+
+		    		imagegif($newImage, $imageFile, 8);
+
+		    	}else if($extended[1] == 'png'){
+
+		    		imagepng($newImage, $imageFile, 8);
+
+		    	}else{
+
+		    		imagejpeg($newImage, $imageFile, 8);
+		    		
+		    	}
+		    }else{
+		    	return false;
+		    }		
+			
+		}	
 }

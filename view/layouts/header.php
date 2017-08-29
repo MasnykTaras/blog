@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Ask a questions</title>
-	<link rel="stylesheet" type="text/css" href="/template/assets/css/main.css">
+	<link rel="stylesheet" type="text/css" href="\template\assets\css\main.css">
 </head>
 <body>
 	<div class="nav clear">

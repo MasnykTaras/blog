@@ -42,7 +42,6 @@ class TaskController
         if(isset($_POST['submit'])){
            $subject = $_POST['subject'];
            $content = $_POST['content'];
-           $photo = $_POST['file'];
 
            $errors = false;
            if(!Task::checkSubject($subject)){
@@ -50,9 +49,11 @@ class TaskController
            }
 
            $userId = User::checkLogged();    
-           if($errors == false){      
-                $result = Task::addTask($subject, $content, $photo, $userId);
+           if($errors == false){   
+                $photo = Task::uploadFile();   
 
+                $result = Task::addTask($subject, $content, $photo, $userId);
+                                
             }
         }
         require_once(ROOT . '/view/task/add.php');

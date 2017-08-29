@@ -27,9 +27,9 @@
 
 			$view = '<ul class="pagination">';
 
-			for ($page = $limits[0]; $page  < $limits[1]; $page++) { 
+			for ($page = $limits[0]; $page  <= $limits[1]; $page++) { 
 				if($page == $this->currentPage){
-					$links .= '<li class="active">' . $page . '</li>';
+					$links .= '<li class="active"><a href="#">' . $page . '</a></li>';
 				}else{
 					$links .= $this->getLinks($page);				 	
 				}
@@ -54,8 +54,8 @@
 			$currentUri = rtrim($_SERVER['REQUEST_URI'], '/') . '/';
 			$currentUri = preg_replace('~/page-[0-9]+~', '', $currentUri);
 
-			$view = '<li><a href="' . $currentUri . $this->index . $page . '">' . $text . '</a></li>';
-			return $view;
+			return '<li><a href="' . $currentUri . $this->index . $page . '">' . $text . '</a></li>';
+			
 		}
 		private function limits()
 		{
@@ -64,7 +64,7 @@
 			$start = $left > 0 ? $left : 1;
 
 			if($start + self::MAXLINK <= $this->amountPage){
-				$end = $star > 1 ? $start +self::MAXLINK : self::MAXLINK;
+				$end = $star > 1 ? $start + self::MAXLINK : self::MAXLINK;
 			}else{
 				$end = $this->amountPage;
 				$start = $this->amountPage - self::MAXLINK > 0 ? $this->amountPage - self::MAXLINK : 1;
