@@ -1,11 +1,12 @@
 <?php 
 
-use models\Task;
-use components\Pagination;
+use app\models\Task;
+use app\components\Pagination;
 
 class SiteController
 {
 	public function actionIndex($page){
+
 
 		
 		if(isset($_POST['submit'])){			
@@ -19,6 +20,7 @@ class SiteController
 
 		$tasksList = Task::viewAll($page, $filter);
 
+		
 
 		$total = Task::allTask()['count'];
 		

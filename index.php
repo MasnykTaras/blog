@@ -8,7 +8,7 @@ session_start();
 
 // connect autoloader
 
-include_once (ROOT . '/components/Autoload.php');
+include_once (ROOT . '/app/components/Autoload.php');
 
 // include_once (ROOT . '/components/Db.php');
 // include_once (ROOT . '/components/Router.php');
@@ -17,10 +17,9 @@ include_once (ROOT . '/components/Autoload.php');
 
 
 // Connect to db
-use components\Router;
+use app\components\Router;
 
 $router = new Router;
-
 
 $router->run();
 

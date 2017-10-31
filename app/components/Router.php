@@ -1,6 +1,6 @@
 <?php 
 
-namespace components;
+namespace app\components;
 
 class Router
 {
@@ -9,7 +9,7 @@ class Router
 
 	public function __construct()
 	{
-		$routesPath = ROOT . '/config/routes.php';
+		$routesPath = ROOT . '/app/config/routes.php';
 		$this->routes = include($routesPath);		
 	}
 
@@ -28,8 +28,10 @@ class Router
 
 
 		foreach ($this->routes as $uriPattern => $path) {
-			
+
 			if(preg_match("~$uriPattern~", $uri)){
+
+				
 			
 				$internalRouter = preg_replace("~$uriPattern~", $path, $uri);
 				$segments = explode('/', $internalRouter);
@@ -49,7 +51,7 @@ class Router
 
 				$parameters = $segments;
 
-				$controllerFile = ROOT . '/controllers/'.$controllerName . '.php';
+				$controllerFile = ROOT . '/app/controllers/'.$controllerName . '.php';
 
 
 				if(file_exists($controllerFile)){
@@ -59,8 +61,6 @@ class Router
 				
 
 				$controllerObject = new $controllerName;
-
-				
 
 				$result = call_user_func_array(array($controllerObject, $actionName), $parameters);
 

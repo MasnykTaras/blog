@@ -2,7 +2,7 @@
 
 include_once(ROOT . '/view/layouts/header.php');
 
-use models\User;
+use app\models\User;
 
 ?>
 <div class="container">

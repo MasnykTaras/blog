@@ -1,5 +1,5 @@
 <?php
-namespace components;
+namespace app\components;
 /*
  * Класс Pagination для генерации постраничной навигации
  */

@@ -1,8 +1,8 @@
 <?php 
 
-	namespace models;
+	namespace app\models;
 
-	use components\Db;
+	use app\components\Db;
 	use PDO;
 	
 	class Task
@@ -14,12 +14,14 @@
 		public static function viewAll($page = 1, $filter = 'id')
 		{
 
+
 			$limit = self::SHOW_BY_DEFAULT;
 	        
 	        $offset = ($page - 1) * self::SHOW_BY_DEFAULT;	
 
 
 	        $db = Db::getConnection();
+	        
 				
 	        $sql = 'SELECT * FROM task '
 	                . 'ORDER BY '.$filter.' ASC LIMIT :limit OFFSET :offset';

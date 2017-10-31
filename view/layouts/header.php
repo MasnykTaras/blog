@@ -1,5 +1,5 @@
 <?php 
-	use models\User;
+	use app\models\User;
 ?>
 <!DOCTYPE html>
 <html>

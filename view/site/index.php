@@ -2,8 +2,8 @@
 
 include_once(ROOT . '/view/layouts/header.php');
 
-use models\Task;
-use models\User;
+use app\models\Task;
+use app\models\User;
 ?>
 <div class="container">
 		<form method="post" action="#" class="form-group col-xs-12">

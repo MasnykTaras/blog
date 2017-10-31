@@ -1,7 +1,7 @@
 <?php
 
-use models\Task;
-use models\User;
+use app\models\Task;
+use app\models\User;
 
 class TaskController
 {
