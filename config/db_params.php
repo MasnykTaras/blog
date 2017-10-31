@@ -1,8 +1,8 @@
-<?php 
+<?php
 	return [
 		'host' => 'localhost',
 		'dbname' => 'blog',
-		'user' => 'root',
-		'pass' => 'root',
+		'user' => 'pirpo',
+		'pass' => 'pirpo',
 	];
 ?>

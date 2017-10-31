@@ -1,109 +1,74 @@
 <?php
-// include_once ROOT . '/models/Task.php';
+
+use models\Task;
+use models\User;
+
 class TaskController
 {
     public function actionView($id) 
     {
-        $comment = '';
-      if(isset($_POST['submit'])){
-        $comment = $_POST['comment'];
-        if(User::checkLogged()){
-           $userId = User::checkLogged(); 
-        }else{
-          $userId = 0;
-        }
-        Task::addComment($comment, $userId, $id);
-      }
     	if($id){
     		$taskOne = Task::viewOne($id);
-        $comments = Task::getComments($id);
 	    	include_once(ROOT . '/view/task/view.php');
     	} 
       return true;   	  
     }
     
-    public function actionIndex($currentPage = 1) 
+    public function actionIndex() 
     {
-      $currentPage = $currentPage;
-      $total = Task::totalTask()['count'];
-
     	$tasksList =[];
-    	$tasksList = Task::viewAll($currentPage);        
+    	$tasksList = Task::viewAll();        
 
-      $pagination = new Pagination($currentPage, 'page-', $total, Task::TASK_PER_PAGE);
     	include_once (ROOT . '/view/task/index.php');	 
       return true;
     }
     public function actionAdd()
     {   
-        $subject = "";
+        $user_name = "";
+        $email ="";
         $content = "";
-        $photo = "";
+        $image = "";
         if(isset($_POST['submit'])){
-           $subject = $_POST['subject'];
-           $content = $_POST['content'];
-
-           $errors = false;
-           if(!Task::checkSubject($subject)){
-                $errors[] = 'Subject must be longer';
-           }
-
-           $userId = User::checkLogged();    
-           if($errors == false){   
-                $photo = Task::uploadFile();   
-
-                $result = Task::addTask($subject, $content, $photo, $userId);
-                                
-            }
+         
+          $user_name = $_POST['user_name'];
+          $email = $_POST['email'];
+          $content = $_POST['content'];
+          $image = Task::uploadFile();
+          $result = Task::addTask($user_name, $email, $content, $image);
         }
         require_once(ROOT . '/view/task/add.php');
         return true;
     }
+   
 
-    public function actionUserTasks()
-    {   
-        $userId = User::checkLogged();
-
-        $tasks = [];
-        $tasks = Task::viewUserAll($userId);   
-
-        include_once(ROOT . '/view/task/userTasks.php');
-        return true;
-    }
-
-    public function actionEditTask($id)
+    public function actionEdit($id)
     {
         
-        $subject = "";
+        $status = "";
         $content = "";
         $photo = "";
         if(isset($_POST['submit'])){
-           $subject = $_POST['subject'];
-           $content = $_POST['content'];
-           $photo = $_POST['file'];
+           $status = $_POST['status'];
 
+           $content = $_POST['content'];
            $errors = false;
-           if(!Task::checkSubject($subject)){
-                $errors[] = 'Subject must be longer';
-           }
 
            $userId = User::checkLogged();    
            if($errors == false){                    
-                $result = Task::editTask($subject, $content, $photo, $id);
+                $result = Task::editTask($content, $status, $id);
             }
         }
         if($id){
-            $taskOne = Task::editOne($id);
+            $taskOne = Task::viewOne($id);
         }
-        include_once(ROOT . '/view/task/editTask.php');  
+        include_once(ROOT . '/view/task/edit.php');  
         return true;
-    }
-    public function actionArchive($id)
+    }  
+    public function actionPreview()
     {
-        $tasks = [];
-        $tasks = Task::viewUserAll($id);   
-
-        include_once(ROOT . '/view/task/archiveUserTasks.php');
-        return true;
+      $data = $_POST['data'];
+      
+      include_once(ROOT .  '/view/task/preview.php');
+      return true;
     }
 }

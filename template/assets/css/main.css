@@ -1,3 +1,6 @@
+body .preview{
+	display: none;
+}
 body {
 	width:100%;
 	margin:0;
@@ -11,7 +14,16 @@ ul,li{
 a{
 	text-decoration:none; 
 }
+.item{
+	border-bottom: 1px solid #e3e3e3;
+	padding: 20px 0;
+}
+
+.image{
+	margin: 20px auto;
+}
 footer{
+	margin-top: 20px;
 	position: relative;
 }
 .footer{
@@ -21,12 +33,13 @@ footer{
 .container{
 	max-width: 1024px;
 	position: relative;
-	margin: 0 auto;
+	margin: 0S auto;
 }
-.nav{
+.nav.clear{
 	display: block;
 	background: #dedede;
 	height: 58px;
+	margin-bottom: 20px;
 }
 .nav ul li{
 	display: block;
@@ -38,73 +51,18 @@ footer{
 	display: block;
 	padding: 20px;
 }
-.user-inf p {
-	margin: 0;
-}
 .form{
 	max-width: 640px;
 	display: block;
 	margin:0 auto;
 	padding: 120px 0;
 }
-.form input{
-	margin:20px 0; 
+.item h4.status{
+	color: #ff0000;
 }
-.form input[type='text'], .form input[type='email'], .form input[type='password'], .form textarea{
-	width: 100%;
+.item .status span{
+	color:#92e730;
 }
-.form input[type='text'], .form input[type='email'], .form input[type='password']{
-	height: 30px;
-}
-.form textarea{
- 	height: 150px;
- }
-.pagination{
-	display: inline-block;
-    padding-left: 0;
-    margin: 20px 0;
-    border-radius: 4px;
-}
-.pagination>li {
-    display: inline;
-}
-.pagination>li>a, .pagination>li>span {
-    position: relative;
-    float: left;
-    padding: 6px 12px;
-    margin-left: -1px;
-    line-height: 1.42857143;
-    color: #337ab7;
-    text-decoration: none;
-    background-color: #fff;
-    border: 1px solid #ddd;
-}
-.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
-    z-index: 3;
-    color: #fff;
-    cursor: default;
-    background-color: #337ab7;
-    border-color: #337ab7;
-}
-.pagination>li:first-child>a, .pagination>li:first-child>span {
-    margin-left: 0;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
-.image-area{
-	
-	float: left;
-	width: 30%;
-}
-.content-area{
-	width: 70%;
-	float: left;
-}
-.pagination-area{
-	clear: both;
-}
-@media screen and (max-width: 1024px){
-	.container{
-		max-width: 720px;
-	}
-}
+
+
+

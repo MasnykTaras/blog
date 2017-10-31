@@ -1,19 +1,19 @@
 <?php 
-return [
-	'cabinet' => 'cabinet/index',
+	return [
+		'sign' => 'user/login',
 
-	'register' => 'user/register',
-	'sign' => 'user/login',
-	'logout' => 'user/logout',
+		'logout' => 'user/logout',
 
-	'edit/([0-9]+)' => 'task/editTask/$1',
-	'add' => 'task/add',
-	'tasks' => 'task/userTasks',
-	'task/([0-9]+)' => 'task/view/$1',
+		'edit/([0-9]+)' => 'task/edit/$1',
 
-	'archive/([0-9]+)' => 'task/archive/$1',
+		'preview' => 'task/preview',
+		
+		'add' => 'task/add',
+		
+		'task/([0-9]+)' => 'task/view/$1',
 
-	'page-([0-9]+)' => 'task/index/$1',
-	''=> 'task/index',
-	
-];
+		'page-([0-9]+)' => 'site/index/$1',
+
+		'' =>'site/index/1',
+	];
+?>

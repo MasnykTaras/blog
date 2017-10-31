@@ -1,22 +1,30 @@
-<?php include ROOT . '/view/layouts/header.php';?>
-	<div class="container">
-		<?php if(isset($result)):?>
-			<p>You add task</p>
-		<?php else: ?>
+<?php include_once(ROOT . '/view/layouts/header.php');?>
+<div class="container">
+	<h2>Add task</h2>
+	<form method="post" action='#' class="form-group" enctype="multipart/form-data">
+		<div>
+		 	<div class="form-group">
+				<input type="text" name="user_name" class="form-control" placeholder="Name">
+			</div>
+			<div class="form-group">
+				<input type="email" name="email" class="form-control" placeholder="Email">
+			</div>
+			<div class="form-group">
+				<textarea name="content" class="form-control" rows="3" placeholder="Content"></textarea>
+			</div>
+			<div class="form-group">
+				<input type="file" name="image" accept="image/gif, image/jpg, image/png, ">
+			</div>
+		</div>
 
-			<form class="form" action="#" method="post" enctype="multipart/form-data">
-			<?php if(isset($errors)):?>
-				<ul>
-					<?php foreach($errors as $error): ?>
-						<li><?php echo $error; ?></li>
-					<?php endforeach; ?>
-				</ul>
-			<?php endif; ?>
-				<input type="text" name='subject' placeholder="Subject" value="<?php if(!empty($_POST['subject'])){echo $_POST['subject'];}?>"><br>
-				<textarea name="content" placeholder="Content"><?php if(!empty($_POST['content'])){echo $_POST['content'];}?></textarea><br>
-				<input type="file" name="image" value="<?php if(!empty($_POST['image'])){echo $_POST['image'];}?>"><br>
-				<input type="submit" name="submit">
-			</form>
-		<?php endif; ?>
-	</div>
-<?php include ROOT . '/view/layouts/footer.php';?>
+		<div class="preview">
+			 <img id="blah" src="#" alt="your image" height="240" width="320">
+			 <div class="preview-content">
+			 	
+			 </div>
+		</div>
+		<input type="submit" name="submit" class="btn btn-default" value="Submit">
+		<p class="btn btn-default view">Preview</p>
+	</form>	
+</div>
+<?php include_once(ROOT . '/view/layouts/footer.php');?>

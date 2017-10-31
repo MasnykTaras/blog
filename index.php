@@ -6,16 +6,22 @@ error_reporting(E_ALL);
 define('ROOT', dirname(__FILE__));
 session_start();
 
+// connect autoloader
+
 include_once (ROOT . '/components/Autoload.php');
 
 // include_once (ROOT . '/components/Db.php');
 // include_once (ROOT . '/components/Router.php');
 
 
-// 2. Connect to db
+
+
+// Connect to db
+use components\Router;
 
 $router = new Router;
-$router->run();
 
+
+$router->run();
 
 ?>
